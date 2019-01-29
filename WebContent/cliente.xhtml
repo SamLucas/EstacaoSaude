@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:body>
+	<h:form>
+		<h:panelGrid columns="2">
+
+			<h:outputLabel value="Nome" for="nome" />
+			<h:inputText id="nome" value="#{clienteController.cliente.nome}" />
+
+			<h:outputLabel value="E-mail" for="email" />
+			<h:inputText id="email" value="#{clienteController.cliente.email}" >
+				<f:passThroughAttribute name="type" value="email"></f:passThroughAttribute>
+			</h:inputText>
+
+			<h:outputLabel value="Sexo" for="sexo" />
+			<h:selectOneRadio id="Sexo" value="#{clienteController.cliente.sexo}">
+				<f:selectItems value="#{clienteController.todosSexos}" var="#{s}"
+					itemLabel="#{s.descricao}" itemValue="#{s}"></f:selectItems>
+			</h:selectOneRadio>
+
+			<h:outputLabel value="Data Cadastro" for="dtCadastro" /> 
+			<h:inputText id="dtCadastro"
+				value="#{clienteController.cliente.dtCadastro.time}">
+				<f:passThroughAttribute name="type" value="date"></f:passThroughAttribute>
+				<f:convertDateTime pattern="yyyy-MM-dd" timeZone="America/Sao_Paulo" />
+			</h:inputText>
+
+			<h:commandButton value="Gravar" action="#{clienteController.gravar}" />
+		</h:panelGrid>
+	</h:form>
+	
+	<h:form>
+		<h:dataTable value="#{clienteController.todosClientes}" var="cli">
+
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				<h:outputText value="#{cli.nome}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Data Cadastro</f:facet>
+				<h:outputText value="#{cli.dtCadastro.time}">
+					<f:convertDateTime patter="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
+				</h:outputText>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Remover</f:facet>
+				<h:commandButton value="Remover"
+					action="#{clienteController.remover(cli)}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Atualizar</f:facet>
+				<h:commandButton value="Atualiza"
+					action="#{clienteController.carregar(cli)}" />
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+</h:body>
+</html>

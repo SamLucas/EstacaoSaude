@@ -1,0 +1,194 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:include src="../template/header.xhtml"></ui:include>
+<h:body>
+
+	<link href='../materiais/css/fullcalendar.min.css' rel='stylesheet'></link>
+	<link href='../materiais/css/fullcalendar.print.min.css'
+		rel='stylesheet' media='print'></link>
+	<script src='../materiais/js/moment.min.js'></script>
+
+	<script src='../materiais/js/fullcalendar.min.js'></script>
+
+	<script>
+		var datas;
+	</script>
+
+	<ui:repeat var="a"
+		value="#{registrosAtividadesController.todosAtividade}">
+		<script>
+			datas = {
+				title : '#{a.nome}',
+				start : '2018-12-21T17:50:00',
+				end : '2018-12-21T18:50:00',
+				url : 'http://localhost:8080/ProjetoES/atividades/index.xhtml?id=#{a.id}'
+			}
+		</script>
+	</ui:repeat>
+
+	<script>
+		function dataAtualFormatada() {
+			var data = new Date(), dia = data.getDate().toString(), diaF = (dia.length == 1) ? '0'
+					+ dia
+					: dia, mes = (data.getMonth() + 1).toString(), //+1 pois no getMonth Janeiro começa com zero.
+			mesF = (mes.length == 1) ? '0' + mes : mes, anoF = data
+					.getFullYear();
+			return anoF + "-" + mesF + "-" + diaF;
+		}
+
+		$(document).ready(function() {
+
+			$('#calendar').fullCalendar({
+				header : {
+					left : 'prev,next today',
+					center : 'title',
+					right : 'month,agendaWeek,agendaDay'
+				},
+				defaultDate : dataAtualFormatada(),
+				navLinks : true, // can click day/week names to navigate views
+				selectable : true,
+				selectHelper : true,
+				editable : false,
+				eventLimit : true, // allow "more" link when too many events
+				events : [ datas ]
+			});
+
+		});
+	</script>
+
+	<ui:include src="../template/menu.xhtml"></ui:include>
+	<main
+		class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+	<div class="main-content-container container-fluid px-4">
+		<!-- Page Header -->
+		<div class="page-header row no-gutters py-4 mb-3 border-bottom">
+			<div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+				<span class="text-uppercase page-subtitle">Agenda</span>
+				<h3 class="page-title">Registro de Atividades</h3>
+			</div>
+		</div>
+		<div class="col-lg-12 mb-12">
+			<div class="card card-small mb-4">
+				<div class="card-header border-bottom">
+					<h6 class="m-0">Cadastro e Alteração de atividades</h6>
+				</div>
+				<h:form>
+					<div class="card-body">
+
+
+
+						<div class="row">
+							<div class="col-sm-6">
+								<strong class="text-muted d-block mb-2">Participantes</strong>
+								<div class="form-group">
+									<h:selectOneMenu
+										value="#{registrosAtividadesController.id_aluno}"
+										class="form-control">
+										<f:selectItem itemLabel="Selecione um Aluno"
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{registrosAtividadesController.todosAluno}" var="f"
+											itemLabel="#{f.nome}" itemValue="#{f.id}" />
+									</h:selectOneMenu>
+								</div>
+								<div class="form-group">
+									<h:selectOneMenu
+										value="#{registrosAtividadesController.id_professor}"
+										class="form-control">
+										<f:selectItem itemLabel="Selecione um professor"
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{registrosAtividadesController.todosProfessor}"
+											var="f" itemLabel="#{f.nome}" itemValue="#{f.id}" />
+									</h:selectOneMenu>
+								</div>
+								<div class="form-group">
+									<h:selectOneMenu
+										value="#{registrosAtividadesController.id_atividade}"
+										class="form-control">
+										<f:selectItem itemLabel="Selecione uma atividade"
+											noSelectionOption="true" />
+										<f:selectItems
+											value="#{registrosAtividadesController.todosAtividade}"
+											var="f" itemLabel="#{f.nome}" itemValue="#{f.id}" />
+									</h:selectOneMenu>
+								</div>
+								<div class="form-group form-row">
+									<div class="form-group col-sm-4">
+										<h:outputLabel value="Hora inicial" class="text-muted"
+											for="hora_inicio" />
+										<h:inputText id="hora_inicio" class="form-control"
+											value="#{registrosAtividadesController.reg.hora_inicial}" />
+									</div>
+									<div class="form-group col-sm-4">
+										<h:outputLabel value="Hora final" for="hora_final"
+											class="text-muted" />
+										<h:inputText id="hora_final" class="form-control"
+											value="#{registrosAtividadesController.reg.hora_final}" />
+									</div>
+									<div class="form-group col-sm-4">
+										<h:outputLabel value="Data" class="text-muted"
+											for="dtCadastro" />
+										<h:inputText id="dtCadastro" class="form-control"
+											value="#{registrosAtividadesController.reg.data.time}">
+											<f:passThroughAttribute name="type" value="date" />
+											<f:convertDateTime pattern="yyyy-MM-dd"
+												timeZone="America/Sao_Paulo" />
+										</h:inputText>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<strong class="text-muted d-block mb-2">Objetivo</strong>
+								<div class="form-group">
+									<h:inputTextarea class="form-control"></h:inputTextarea>
+								</div>
+								<div class="form-group form-row">
+									<div class="form-group col-sm-4">
+										<h:outputLabel value="Numero de series" class="text-muted"
+											for="serie" />
+										<h:inputText id="serie" class="form-control"
+											value="#{registrosAtividadesController.reg.serie}" />
+									</div>
+									<div class="form-group col-sm-4">
+										<h:outputLabel value="Repetição" for="repeticao"
+											class="text-muted" />
+										<h:inputText id="repeticao" class="form-control"
+											value="#{registrosAtividadesController.reg.rep}" />
+									</div>
+									<div class="form-group col-sm-4">
+										<h:outputLabel value="Intervalo" for="intervalo"
+											class="text-muted" />
+										<h:inputText id="intervalo" class="form-control"
+											value="#{registrosAtividadesController.reg.intervalo}" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<h:commandButton class="btn btn-primary" value="Salvar"
+							action="#{registrosAtividadesController.gravar}"></h:commandButton>
+					</div>
+				</h:form>
+			</div>
+		</div>
+		<div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+			<div class="card card-large">
+				<div class="card-body ">
+					<div id='calendar' style="margin-top: 20px;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</main>
+	<ui:include src="../template/footer.xhtml"></ui:include>
+</h:body>
+</html>

@@ -1,0 +1,118 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:include src="../template/header.xhtml"></ui:include>
+<h:body>
+
+	<ui:include src="../template/menu.xhtml"></ui:include>
+	<ui:include src="sub_menu.xhtml"></ui:include>
+
+	<main
+		class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+	<div class="main-content-container container-fluid px-4">
+		<!-- Page Header -->
+		<div class="page-header row no-gutters py-4 mb-3 border-bottom">
+			<div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+				<span class="text-uppercase page-subtitle">Cadastro</span>
+				<h3 class="page-title">Alunos</h3>
+			</div>
+		</div>
+
+		<div class="col-lg-12 mb-12">
+			<div class="card card-small mb-4">
+				<div class="card-header border-bottom">
+					<h6 class="m-0">Dados</h6>
+				</div>
+				<div class="card-body">
+					<form class="row">
+						<div class="col-sm-6">
+							<strong class="text-muted d-block mb-2">Dados Pessoais</strong>
+							<div class="form-group">
+								<h:inputText a:placeholder="Nome" class="form-control" />
+							</div>
+							<div class="form-group">
+								<h:inputText a:placeholder="Email" class="form-control" />
+							</div>
+							<div class="form-group">
+								<h:inputText a:placeholder="telefone" class="form-control" />
+							</div>
+							<div class="form-group form-row">
+								<div class="form-group col-sm-4">
+									<h:inputText a:placeholder="Peso" class="form-control" />
+								</div>
+								<div class="form-group col-sm-4">
+									<h:inputText a:placeholder="Altura" class="form-control" />
+								</div>
+								<div class="form-group col-sm-4">
+									<h:inputText class="form-control"
+										a:placeholder="Data de nascimento">
+										<f:convertDateTime pattern="yyyy-MM-dd" />
+									</h:inputText>
+								</div>
+							</div>
+							<strong class="text-muted d-block mb-2">Observações</strong>
+							<div class="form-group">
+								<h:inputTextarea class="form-control"></h:inputTextarea>
+							</div>
+							<div class="form-group">
+								<h:inputText a:placeholder="Dores" class="form-control" />
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<strong class="text-muted d-block mb-2">Objetivo</strong>
+							<div class="form-group">
+								<h:inputTextarea class="form-control"></h:inputTextarea>
+							</div>
+							<strong class="text-muted d-block mb-2">Localidade</strong>
+							<div class="form-group form-row">
+								<div class="form-group col-sm-8">
+									<h:inputText a:placeholder="Endereço" class="form-control" />
+								</div>
+								<div class="form-group col-sm-4">
+									<h:inputText a:placeholder="Numero" class="form-control" />
+								</div>
+								<div class="form-group col-sm-6">
+									<h:inputText a:placeholder="Cidade" class="form-control" />
+								</div>
+								<div class="form-group col-sm-6">
+									<h:inputText a:placeholder="Estado" class="form-control" />
+								</div>
+							</div>
+
+							<strong class="text-muted d-block mb-2">Sexo</strong>
+							<div class="custom-control custom-control-inline custom-radio">
+								<input type="radio" id="masculino" class="custom-control-input"
+									name="inlineRadioOptions"></input> <label
+									class="custom-control-label" for="masculino">Masculino</label>
+							</div>
+							<div class="custom-control custom-control-inline custom-radio ">
+								<input type="radio" id="feminino" class="custom-control-input"
+									name="inlineRadioOptions"></input> <label
+									class="custom-control-label" for="feminino">Feminino</label>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<h:commandButton class="btn btn-primary"
+						value="Salvar
+						mudanças"></h:commandButton>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Fechar</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	</main>
+
+
+	<ui:include src="../template/footer.xhtml"></ui:include>
+</h:body>
+</html>

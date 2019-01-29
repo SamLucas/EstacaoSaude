@@ -1,0 +1,83 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<link
+		href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+		rel="stylesheet" id="bootstrap-css"></link>
+	<script
+		src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet"
+		href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"></link>
+	<link href='http://fonts.googleapis.com/css?family=Varela+Round'
+		rel='stylesheet' type='text/css'></link>
+	<link href="materiais/css/css_login.css"
+		rel='stylesheet' type='text/css'></link>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
+		
+		<script src="materiais/js_login.js"></script>
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, maximum-scale=1" />
+		
+
+
+</h:head>
+<h:body>
+
+
+<!-- Where all the magic happens -->
+<!-- LOGIN FORM -->
+<div class="text-center" style="padding:50px 0">
+	<div class="logo">login</div>
+	<!-- Main Form -->
+	<div class="login-form-1">
+		
+		<h:form id="login-form" class="text-left">
+			<div class="login-form-main-message"></div>
+			<div class="main-login-form">
+				<div class="login-group">
+					<h:messages id="msg" globalOnly="true" class="alert alert-info"></h:messages>
+					<div class="form-group">
+						<h:selectOneMenu value="#{loginController.categoria}" class="form-control">
+							<f:selectItem  itemValue="1" itemLabel="Professor"/>
+							<f:selectItem  itemValue="0" itemLabel="Aluno"/>
+						</h:selectOneMenu>
+					</div>
+					<div class="form-group">
+						
+						<label for="lg_username" class="sr-only">Username</label>
+						<h:inputText value="#{loginController.email}" a:placeholder="username"  class="form-control"/>
+						
+					</div>
+					<div class="form-group">
+						<label for="lg_password" class="sr-only">Password</label>
+						<h:inputSecret  class="form-control"  a:placeholder="Senha" value="#{loginController.senha}"></h:inputSecret>
+					</div>
+					<div class="form-group login-group-checkbox">
+						<input type="checkbox" id="lg_remember" name="lg_remember"></input>
+						<label for="lg_remember">remember</label>
+					</div>
+				</div>
+				<h:commandLink type="submit" class="login-button" action="#{loginController.logar}" ><i class="fa fa-chevron-right"></i></h:commandLink>
+			</div>
+			<div class="etc-login-form">
+				<!-- <p>forgot your password? <a href="#">click here</a></p>
+				<p>new user? <a href="#">create new account</a></p> -->
+			</div>
+		</h:form>
+	</div>
+	<!-- end:Main Form -->
+</div>
+
+
+</h:body>
+</html>
+
+

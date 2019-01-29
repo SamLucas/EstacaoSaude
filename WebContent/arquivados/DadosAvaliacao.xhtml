@@ -1,0 +1,246 @@
+<?xml version="1.0"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta http-equiv="Content-Type" />
+	<link href="css/produtocss.css" rel="stylesheet"></link>
+	<link rel="stylesheet" href="resources/css/bootstrap.min.css"
+		type="text/css"></link>
+</h:head>
+
+
+
+<h:body>
+
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="card">
+						<div class="card-header bg-dark text-white">Avaliação</div>
+
+						<div class="card-body">
+							<h:form>
+								<div class="form-group">
+									<h:outputLabel value="Tórax" for="torax" />
+									<h:inputText id="torax" class="form-control"
+										value="#{avaliacaoController.avaliacao.torax}" />
+								</div>
+								
+								<div class="form-group">
+									<h:outputLabel value="Cintura" for="cintura" />
+									<h:inputText id="cintura" class="form-control"
+										value="#{avaliacaoController.avaliacao.cintura}" />
+								</div>
+								
+								<div class="form-group">
+									<h:outputLabel value="Abdome" for="abdome" />
+									<h:inputText id="abdome" class="form-control"
+										value="#{avaliacaoController.avaliacao.abdome}" />
+								</div>
+								
+								<div class="form-group">
+									<h:outputLabel value="Quadril" for="quadril" />
+									<h:inputText id="quadril" class="form-control"
+										value="#{avaliacaoController.avaliacao.quadril}" />
+								</div>
+								
+								<div class="form-group">
+									<h:outputLabel value="Antebraços" for="antebracos" />
+									<h:inputText id="antebracos" class="form-control"
+										value="#{avaliacaoController.avaliacao.antebracos}" />
+								</div>
+								
+								<div class="form-group">
+									<h:outputLabel value="Braços" for="bracos" />
+									<h:inputText id="bracos" class="form-control"
+										value="#{avaliacaoController.avaliacao.bracos}" />
+								</div>
+								
+								<div class="form-group">
+									<h:outputLabel value="Coxas" for="coxas" />
+									<h:inputText id="coxas" class="form-control"
+										value="#{avaliacaoController.avaliacao.coxas}" />
+								</div>
+								
+								<div class="form-group">
+									<h:outputLabel value="Panturrilhas" for="panturrilhas" />
+									<h:inputText id="panturrilhas" class="form-control"
+										value="#{avaliacaoController.avaliacao.panturrilhas}" />
+								</div>
+								
+								<div class="form-group">
+									<h:outputLabel value="Subscapular" for="subscapular" />
+									<h:inputText id="subscapular" class="form-control"
+										value="#{avaliacaoController.avaliacao.subscapular}" />
+								</div>
+								
+								<div class="form-group">
+									<h:outputLabel value="Tricipital" for="tricipital" />
+									<h:inputText id="tricipital" class="form-control"
+										value="#{avaliacaoController.avaliacao.tricipital}" />
+								</div>
+								
+								<div class="form-group">
+									<h:outputLabel value="Peitoral" for="peitoral" />
+									<h:inputText id="peitoral" class="form-control"
+										value="#{avaliacaoController.avaliacao.peitoral}" />
+								</div>
+								
+								<div class="form-group">
+									<h:outputLabel value="Axilar_media" for="axilar_media" />
+									<h:inputText id="axilar_media" class="form-control"
+										value="#{avaliacaoController.avaliacao.axilar_media}" />
+								</div>
+								
+								<div class="form-group">
+									<h:outputLabel value="Supra_iliaca" for="supra_iliaca" />
+									<h:inputText id="supra_iliaca" class="form-control"
+										value="#{avaliacaoController.avaliacao.supra_iliaca}" />
+								</div>
+								
+								<div class="form-group">
+									<h:outputLabel value="Abdominal" for="abdominal" />
+									<h:inputText id="abdominal" class="form-control"
+										value="#{avaliacaoController.avaliacao.abdominal}" />
+								</div>
+								
+								<div class="form-group">
+									<h:outputLabel value="Coxa" for="coxa" />
+									<h:inputText id="coxa" class="form-control"
+										value="#{avaliacaoController.avaliacao.coxa}" />
+								</div>
+								
+								<div class="form-group">
+									<h:outputLabel value="Aluno" for="aluno"/>
+									<h:selectOneMenu id="aluno" value="#{avaliacaoController.alunoId}" class="custom-select">
+										<f:selectItem itemLabel="Selecionar" noSelectionOption="true"/>
+										<f:selectItems value="#{alunoController.todosAluno}" var="aluno" itemLabel="#{aluno.nome}" itemValue="#{aluno.id}"/>
+									</h:selectOneMenu>
+								</div>
+						
+								
+								<h:commandButton value="Salvar" class="btn btn-primary btn-block" action="#{avaliacaoController.gravar}" />
+							</h:form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<h:form>
+						<h:dataTable class="table table-hover table-borderLess"
+							value="#{avaliacaoController.todasAvaliacao}" var="ava">
+							<h:column>
+								<f:facet name="header">Identificador</f:facet>
+								<h:outputText value="#{ava.id}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Tórax</f:facet>
+								<h:outputText value="#{ava.torax}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Cintura</f:facet>
+								<h:outputText value="#{ava.cintura}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Abdome</f:facet>
+								<h:outputText value="#{ava.abdome}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Quadril</f:facet>
+								<h:outputText value="#{ava.quadril}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Antebraços</f:facet>
+								<h:outputText value="#{ava.antebracos}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Braços</f:facet>
+								<h:outputText value="#{ava.bracos}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Coxas</f:facet>
+								<h:outputText value="#{ava.coxas}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Panturrilhas</f:facet>
+								<h:outputText value="#{ava.panturrilhas}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Subscapular</f:facet>
+								<h:outputText value="#{ava.subscapular}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Tricipital</f:facet>
+								<h:outputText value="#{ava.tricipital}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Peitoral</f:facet>
+								<h:outputText value="#{ava.peitoral}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Axilar-média</f:facet>
+								<h:outputText value="#{ava.axilar_media}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Supra-ilíaca</f:facet>
+								<h:outputText value="#{ava.supra_iliaca}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Abdominal</f:facet>
+								<h:outputText value="#{ava.abdominal}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Coxa</f:facet>
+								<h:outputText value="#{ava.coxa}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Aluno</f:facet>
+								<h:outputText value="#{(ava.aluno.nome == null) ? '--' : ava.aluno.nome}"/>
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Remover</f:facet>
+								<h:commandLink class="btn btn-success" value="remove"
+									action="#{tipoAtividadeController.remover(tip)}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Alterar</f:facet>
+								<h:commandLink class="btn btn-primary" value="alterar"
+									action="#{tipoAtividadeController.carregar(tip)}" />
+							</h:column>
+
+						</h:dataTable>
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+		<script src="resources/js/jquery-3.2.1.min.js" />
+		<script src="resources/js/popper.min.js" />
+		<script src="resources/js/bootstrap.min.js" />
+</h:body>
+</html>

@@ -1,0 +1,216 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:include src="../template/header.xhtml"></ui:include>
+<h:body>
+
+	<ui:include src="../template/menu.xhtml"></ui:include>
+	<ui:include src="sub_menu.xhtml"></ui:include>
+
+	<main
+		class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+	<div class="main-content-container container-fluid px-4">
+		<!-- Page Header -->
+		<div class="page-header row no-gutters py-4 mb-3 border-bottom">
+			<div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+				<span class="text-uppercase page-subtitle">Cadastro</span>
+				<h3 class="page-title">Dados Cadastrados</h3>
+			</div>
+		</div>
+
+		<div class="col-lg-12 mb-12">
+			<div class="card card-small mb-4">
+				<div class="card-header border-bottom">
+					<h6 class="m-0">Dados</h6>
+				</div>
+				<div class="card-body">
+					<ul class="nav nav-tabs">
+						<li class="nav-item"><a class="nav-link" href="#tab_aluno"
+							aria-controls="settings" role="tab" data-toggle="tab">Aluno</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="#tab_professor" aria-controls="settings" role="tab"
+							data-toggle="tab">Professores</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="#tab_atividade" aria-controls="settings" role="tab"
+							data-toggle="tab">Atividades</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="#tab_tp_atividades" aria-controls="settings" role="tab"
+							data-toggle="tab">Tipos de Atividades</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="#tab_especialidades" aria-controls="settings" role="tab"
+							data-toggle="tab">Especialidades</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="#tab_tipoespecialidade" aria-controls="settings" role="tab"
+							data-toggle="tab">Tipos de Especialidade</a></li>
+					</ul>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="tab_aluno">
+							<h:form>
+								<h:dataTable class="table table-hover table-borderLess"
+									value="#{alunoController.todosAluno}" var="aaa">
+									<h:column>
+										<f:facet name="header">Identificador</f:facet>
+										<h:outputText value="#{aaa.id}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Nome</f:facet>
+										<h:outputText value="#{aaa.nome}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Nome</f:facet>
+										<h:outputText value="#{aaa.email}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Ação</f:facet>
+										<h:commandLink action="#{alunoController.remover(aaa)}"
+											value="Alterar" class="btn btn-danger" />
+										<h:commandLink action="#{alunoController.carregar(aaa)}"
+											value="Alterar" class="btn btn-success" />
+									</h:column>
+								</h:dataTable>
+							</h:form>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="tab_atividade">
+							<h:form>
+								<h:dataTable class="table table-hover table-borderLess"
+									value="#{atividadeController.todasAtividades}" var="aaa">
+									<h:column>
+										<f:facet name="header">Identificador</f:facet>
+										<h:outputText value="#{aaa.id}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Nome</f:facet>
+										<h:outputText value="#{aaa.nome}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Ação</f:facet>
+										<h:commandLink action="#{atividadeController.remover(aaa)}"
+											value="Alterar" class="btn btn-danger" />
+										<h:commandLink action="#{atividadeController.carregar(aaa)}"
+											value="Alterar" class="btn btn-success" />
+									</h:column>
+								</h:dataTable>
+							</h:form>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="tab_professor">
+							<h:form id="formprofessor">
+								<h:dataTable class="table table-hover table-borderLess"
+									value="#{professorController.todosProfessor}" var="pro">
+									<h:column>
+										<f:facet name="header">Identificador</f:facet>
+										<h:outputText value="#{pro.id}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Nome</f:facet>
+										<h:outputText value="#{pro.nome}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Ação</f:facet>
+										<h:commandLink action="#{professorController.remover(aaa)}"
+											value="Alterar" class="btn btn-danger" />
+										<h:commandLink action="#{professorController.carregar(pro)}"
+											value="Atualizar" class="btn btn-success" />
+									</h:column>
+								</h:dataTable>
+							</h:form>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="tab_tipoespecialidade">
+							<h:form>
+								<h:dataTable class="table table-hover table-borderLess"
+									value="#{tipodeEspecialidadeController.todosTipodeEspecialidade}"
+									var="tipo">
+									<h:column>
+										<f:facet name="header">Identificador</f:facet>
+										<h:outputText value="#{tipo.id}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Nome</f:facet>
+										<h:outputText value="#{tipo.nome}" />
+									</h:column>
+
+									<h:column>
+										<f:facet name="header">Dores Frequentes</f:facet>
+										<h:outputText value="#{tipo.doresfrequentes}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Ação</f:facet>
+										<h:commandLink class="btn btn-danger" value="remove"
+											action="#{tipodeEspecialidadeController.remover(tipo)}" />
+										<h:commandLink class="btn btn-success" value="alterar"
+											action="#{tipodeEspecialidadeController.carregar(tipo)}" />
+									</h:column>
+								</h:dataTable>
+							</h:form>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="tab_tp_atividades">
+							<h:form>
+								<h:dataTable class="table table-hover table-borderLess"
+									value="#{tipoAtividadeController.todosTipoAtividade}" var="tip">
+									<h:column>
+										<f:facet name="header">Identificador</f:facet>
+										<h:outputText value="#{tip.id}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Nome</f:facet>
+										<h:outputText value="#{tip.nome}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Observação</f:facet>
+										<h:outputText value="#{tip.observacao}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Ação</f:facet>
+										<h:commandLink class="btn btn-danger" value="remove"
+											action="#{tipodeEspecialidadeController.remover(tipo)}" />
+										<h:commandLink
+											action="#{tipoAtividadeController.carregar(tip)}"
+											value="Alterar" class="btn btn-success" />
+									</h:column>
+								</h:dataTable>
+							</h:form>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="tab_especialidades">
+							<h:form>
+								<h:dataTable class="table table-hover table-borderLess"
+									value="#{especialidadesMedicasController.todosEspecialidadesMedicas}"
+									var="esp">
+									<h:column>
+										<f:facet name="header">Identificador</f:facet>
+										<h:outputText value="#{esp.id}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Nome</f:facet>
+										<h:outputText value="#{esp.nome}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Tipo</f:facet>
+										<h:outputText
+											value="#{(esp.tipo.nome == null) ? '--' : esp.tipo.nome}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Ação</f:facet>
+										<h:commandLink class="btn btn-danger" value="remove"
+											action="#{especialidadesMedicasController.remover(esp)}" />
+										<h:commandLink class="btn btn-success" value="alterar"
+											action="#{especialidadesMedicasController.carregar(esp)}" />
+									</h:column>
+								</h:dataTable>
+							</h:form>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	</main>
+	<ui:include src="../template/footer.xhtml"></ui:include>
+</h:body>
+</html>

@@ -1,0 +1,290 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:include src="../template/header.xhtml"></ui:include>
+<h:body>
+
+	<ui:include src="../template/menu.xhtml"></ui:include>
+	<ui:include src="sub_menu.xhtml"></ui:include>
+
+	<main
+		class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+	<div class="main-content-container container-fluid px-4">
+		<!-- Page Header -->
+		<div class="page-header row no-gutters py-4 mb-3 border-bottom">
+			<div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+				<span class="text-uppercase page-subtitle">Cadastro</span>
+				<h3 class="page-title">Dados Cadastrados</h3>
+			</div>
+		</div>
+
+		<div class="col-lg-12 mb-12">
+			<div class="card card-small mb-4">
+				<div class="card-header border-bottom">
+					<h6 class="m-0">Dados</h6>
+				</div>
+				<div class="card-body">
+					<ul class="nav nav-tabs">
+						<li class="nav-item"><a class="nav-link"
+							href="#tab_professor" aria-controls="settings" role="tab"
+							data-toggle="tab">Professores</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="#tab_atividade" aria-controls="settings" role="tab"
+							data-toggle="tab">Atividades</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="#tab_tp_atividades" aria-controls="settings" role="tab"
+							data-toggle="tab">Tipos de Atividades</a></li>
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane" id="tab_atividade">
+							<h:form>
+								<h:dataTable class="table table-hover table-borderLess"
+									value="#{atividadeController.todasAtividades}" var="aaa">
+									<h:column>
+										<f:facet name="header">Identificador</f:facet>
+										<h:outputText value="#{aaa.id}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Nome</f:facet>
+										<h:outputText value="#{aaa.nome}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Ação</f:facet>
+										<div class="btn btn-danger">
+											<i class="far fa-trash-alt"></i>
+										</div>
+										<h:commandLink action="#{atividadeController.carregar(aaa)}" value="Alterar" class="btn btn-sucess"/>
+
+									</h:column>
+								</h:dataTable>
+							</h:form>
+						</div>
+						<div role="tabpanel" class="tab-pane active" id="tab_professor">
+							<h:form id="formprofessor">
+								<h:dataTable class="table table-hover table-borderLess"
+									value="#{professorController.todosProfessor}" var="pro">
+									<h:column>
+										<f:facet name="header">Identificador</f:facet>
+										<h:outputText value="#{pro.id}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Nome</f:facet>
+										<h:outputText value="#{pro.nome}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Ação</f:facet>
+										<a class="btn btn-danger"
+											data-toggle="modal" data-target="#deletar">Deletar</a>
+										<h:commandLink
+											action="#{professorController.carregar(pro)}"
+											value="Atualizar" class="btn btn-success" />
+											
+											
+									</h:column>
+								</h:dataTable>
+							</h:form>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="tab_tp_atividades">
+
+							<h:form>
+								<h:dataTable class="table table-hover table-borderLess"
+									value="#{tipoAtividadeController.todosTipoAtividade}" var="tip">
+									<h:column>
+										<f:facet name="header">Identificador</f:facet>
+										<h:outputText value="#{tip.id}" />
+									</h:column>
+
+									<h:column>
+										<f:facet name="header">Nome</f:facet>
+										<h:outputText value="#{tip.nome}" />
+									</h:column>
+
+									<h:column>
+										<f:facet name="header">Observação</f:facet>
+										<h:outputText value="#{tip.observacao}" />
+									</h:column>
+
+									<h:column>
+										<f:facet name="header">Ação</f:facet>
+										<button type="button" class="btn btn-danger"
+											data-toggle="modal" data-target="#exampleModal"
+											data-whatever="#{tip.observacao}">
+											<i class="far fa-trash-alt"></i>
+										</button>
+										<h:commandLink
+												action="#{tipoAtividadeController.carregar(tip)}" value="Alterar" class="btn btn-success"/>
+											
+
+									</h:column>
+
+								</h:dataTable>
+							</h:form>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="tab_especialidades">.g..</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	</main>
+
+	<!-- professor -->
+	<div class="modal fade" id="modal_professor" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Cadastro de
+						Professores</h4>
+				</div>
+				<h:form>
+					<div class="modal-body row">
+						<div class="form-group col-sm-12">
+							<h:inputText a:placeholder="Nome" class="form-control"
+								value="#{professorController.professor.nome}" />
+						</div>
+						<div class="form-group col-sm-12">
+							<h:inputText a:placeholder="Nome" class="form-control"
+								value="#{professorController.professor.telefone}" />
+						</div>
+						<div class="form-group col-sm-12">
+							<h:inputText a:placeholder="Nome" class="form-control"
+								value="#{professorController.professor.email}" />
+						</div>
+						<div class="form-group col-sm-12">
+							<h:selectOneMenu class="form-control"
+								value="#{professorController.id_cidade}">
+								<f:selectItem itemLabel="Selecionar" noSelectionOption="true" />
+								<f:selectItems value="#{professorController.todasCidades}"
+									var="t" itemValue="#{t.id}" itemLabel="#{t.nome}" />
+							</h:selectOneMenu>
+						</div>
+						<div class="col-sm-12">
+							<h:outputLabel value="Sexo" for="sexo" />
+							<h:selectOneRadio value="#{professorController.professor.sexo}">
+								<f:selectItems value="#{professorController.todosSexos}" var="s"
+									itemLabel="#{s.descricao}" itemValue="#{s}" />
+							</h:selectOneRadio>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<h:commandButton class="btn btn-primary"
+							value="Salvar
+						mudanças"
+							action="#{professorController.gravar}"></h:commandButton>
+						<button type="button" class="btn btn-danger" data-dismiss="modal"
+							aria-label="Close">Fechar</button>
+					</div>
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+	<!-- atividade -->
+	<div class="modal fade" id="atividade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Cadastro de
+						atividades</h4>
+				</div>
+				<h:form>
+					<div class="modal-body">
+						<div class="form-group">
+							<h:inputText a:placeholder="Nome" class="form-control"
+								value="#{atividadeController.atividade.nome}" />
+						</div>
+						<div class="form-group">
+							<h:selectOneMenu class="form-control"
+								value="#{atividadeController.id_tipo}">
+								<f:selectItem itemLabel="Selecionar" noSelectionOption="true" />
+								<f:selectItems value="#{atividadeController.todosTipos}" var="t"
+									itemValue="#{t.id}" itemLabel="#{t.nome}" />
+							</h:selectOneMenu>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<h:commandButton class="btn btn-primary"
+							value="Salvar
+						mudanças"
+							action="#{atividadeController.gravar}"></h:commandButton>
+						<button type="button" class="btn btn-danger" data-dismiss="modal"
+							aria-label="Close">Fechar</button>
+					</div>
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+	<!-- tipo atividade -->
+	<div class="modal fade" id="tipo_atividade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Cadastro de tipos de
+						atividades</h4>
+				</div>
+				<h:form>
+					<div class="card-body">
+						<div class="form-group">
+							<h:outputLabel value="Nome" for="nome" />
+							<h:inputText id="nome" class="form-control"
+								value="#{tipoAtividadeController.tipoatividade.nome}" />
+						</div>
+						<div class="form-group">
+							<h:outputLabel value="Observação" for="observacao" />
+							<h:inputText id="observacao" class="form-control"
+								value="#{tipoAtividadeController.tipoatividade.observacao}" />
+						</div>
+					</div>
+					<div class="modal-footer">
+						<h:commandButton value="Salvar" class="btn btn-primary"
+							action="#{tipoAtividadeController.gravar}" />
+						<button type="button" class="btn btn-danger" data-dismiss="modal"
+							aria-label="Close">Fechar</button>
+					</div>
+
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+	<!-- deletar -->
+	<div class="modal fade" id="deletar" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Confirme a exclusão</h4>
+				</div>
+				<h:form>
+					<div class="card-body">
+						<p>Deseja excluir o cadastro: " "</p>
+					</div>
+					<div class="modal-footer">
+						<h:commandButton value="Salvar" class="btn btn-primary" />
+						<button type="button" class="btn btn-danger" data-dismiss="modal"
+							aria-label="Close">Fechar</button>
+					</div>
+
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+	<ui:include src="../template/footer.xhtml"></ui:include>
+
+</h:body>
+</html>

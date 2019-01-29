@@ -1,0 +1,149 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:include src="header.xhtml"></ui:include>
+<h:body>
+
+	<ui:include src="menu.xhtml"></ui:include>
+	<main
+		class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+	<div class="main-content-container container-fluid px-4">
+		<div class="page-header row no-gutters py-4 mb-3 border-bottom">
+			<div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+				<span class="text-uppercase page-subtitle">Avaliação</span>
+				<h3 class="page-title">Especialidades Médicas</h3>
+			</div>
+		</div>
+		<div class="col-lg-12 mb-12">
+			<div class="card card-small mb-4">
+				<div class="card-header border-bottom">
+					<h6 class="m-0">Cadastro e alteração de avalaições</h6>
+				</div>
+				<h:form>
+					<div class="modal-body row">
+						<div class="form-group col-sm-4">
+							<h:outputLabel value="Aluno" for="aluno" />
+							<h:selectOneMenu id="aluno"
+								value="#{alunoEspecialidadeController.id_aluno}"
+								class="form-control">
+								<f:selectItem itemLabel="Selecione um aluno"
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{alunoEspecialidadeController.todosAluno}" var="a"
+									itemLabel="#{a.nome}" itemValue="#{a.id}" />
+							</h:selectOneMenu>
+						</div>
+						<div class="form-group col-sm-4">
+							<h:outputLabel value="Especialidade" for="especialidade" />
+							<h:selectOneMenu id="especialidade"
+								value="#{alunoEspecialidadeController.id_especialidade}"
+								class="form-control">
+								<f:selectItem itemLabel="Selecione uma especialidade"
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{especialidadesMedicasController.todosTipodeEspecialidade}"
+									var="a" itemLabel="#{a.nome}" itemValue="#{a.id}" />
+							</h:selectOneMenu>
+						</div>
+						<div class="form-group col-sm-4">
+							<h:outputLabel value="Data dos sintomas" for="dsintomas" />
+							<h:inputText id="dsintomas" class="form-control"
+								value="#{alunoEspecialidadeController.ALESP.data.time}">
+								<f:passThroughAttribute name="type" value="date" />
+								<f:convertDateTime pattern="yyyy-MM-dd"
+									timeZone="America/Sao_Paulo" />
+							</h:inputText>
+						</div>
+						<div class="form-group col-sm-12">
+							<h:outputLabel value="Descrição" for="descricao" />
+							<h:inputTextarea id="descricao" class="form-control"
+								value="#{alunoEspecialidadeController.ALESP.observacoes}" />
+						</div>
+					</div>
+					<div class="modal-footer">
+						<a class="a11 btn btn-success" href="especialidadesmedicas.xhtml">Novo
+							Cadastro</a>
+						<h:commandButton value="Salvar" class="btn btn-primary"
+							action="#{alunoEspecialidadeController.gravar}" />
+					</div>
+				</h:form>
+			</div>
+		</div>
+
+		<div class="col-lg-12 mb-12">
+			<div class="card card-small mb-4">
+				<div class="card-header border-bottom">
+					<h6 class="m-0">Buscar aluno</h6>
+				</div>
+				<h:form claa="container">
+					<div class="card-body row">
+						<div class="form-group col-sm-10">
+							<h:inputText a:placeholder="Digite o nome do aluno..."
+								value="#{especialidadesMedicasController.nome_aluno}" class="form-control" />
+						</div>
+						<div class="form-group col-sm-2">
+							<h:commandLink action="#{especialidadesMedicasController.getEspecialidadesMedicas}"
+								value="Buscar" class="btn btn-primary btn-block" />
+						</div>
+					</div>
+				</h:form>
+			</div>
+		</div>
+
+		<div class="col-lg-12 mb-12">
+			<div class="card card-small mb-4">
+				<div class="card-header border-bottom">
+					<h6 class="m-0">Avaliações</h6>
+				</div>
+				<div class="card-body">
+					<h:form>
+						<h:dataTable class="table table-hover table-borderLess"
+							id="table_alun"
+							value="#{alunoEspecialidadeController.listalunespc}"
+							var="aaa">
+							<h:column>
+								<f:facet name="header">Identificador</f:facet>
+								<h:outputText value="#{aaa.id}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Aluno</f:facet>
+								<h:outputText value="#{aaa.aln.id}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Especialidade</f:facet>
+								<h:outputText value="#{aaa.ESPM.id}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Data</f:facet>
+								<h:outputText value="#{aaa.data.time}">
+									<f:convertDateTime pattern="dd/MM/yyyy"
+										timeZone="America/Sao_Paulo" />
+								</h:outputText>
+							</h:column>
+							<h:column>
+								<f:facet name="header">Ação</f:facet>
+								<h:commandButton
+									action="#{alunoEspecialidadeController.remover(aaa)}"
+									value="Deletar" class="btn btn-danger" />
+								<h:commandButton
+									action="#{alunoEspecialidadeController.carregar(aaa)}"
+									value="Alterar" class="btn btn-success" />
+							</h:column>
+						</h:dataTable>
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	</main>
+
+	<ui:include src="footer.xhtml"></ui:include>
+</h:body>
+</html>

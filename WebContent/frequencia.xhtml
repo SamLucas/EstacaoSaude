@@ -1,0 +1,101 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:include src="header.xhtml"></ui:include>
+<h:body>
+
+
+	<ui:include src="menu.xhtml"></ui:include>
+	<main
+		class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+	<div class="main-content-container container-fluid px-4">
+		<div class="page-header row no-gutters py-4 mb-3 border-bottom">
+			<div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+				<span class="text-uppercase page-subtitle">Frequência</span>
+				<h3 class="page-title">Frequência dos alunos</h3>
+			</div>
+		</div>
+
+		<div class="col-lg-12 mb-12">
+			<div class="card card-small mb-4">
+				<h:form claa="container">
+					<div class="card-body">
+						<div class="form-group row" style="margin-top: 10px;">
+							<label for="staticEmail" class="col-sm-4 col-form-label">Selecione
+								uma data para listar as frequências</label>
+							<div class="col-sm-4">
+								<h:inputText id="dtCadastro" class="form-control"
+									value="#{frequenciaController.data.time}">
+									<f:passThroughAttribute name="type" value="date" />
+									<f:convertDateTime pattern="yyyy-MM-dd"
+										timeZone="America/Sao_Paulo" />
+								</h:inputText>
+							</div>
+							<div class="col-sm-4 form-controll">
+								<h:commandButton value="Buscar" class="btn btn-success"
+									action="#{frequenciaController.buscar}" />
+							</div>
+						</div>
+					</div>
+				</h:form>
+			</div>
+		</div>
+
+
+		<div class="col-lg-12 mb-12">
+			<div class="card card-small mb-4">
+				<div class="card-header border-bottom">
+					<h6 class="m-0">Histórico de frequência</h6>
+				</div>
+				<div class="card-body">
+					<h:form>
+						<h:dataTable class="table table-hover table-borderLess"
+							value="#{frequenciaController.REg}" var="aaa">
+							<h:column>
+								<f:facet name="header">Identificador</f:facet>
+								<h:outputText value="#{aaa.id}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Nome</f:facet>
+								<h:outputText value="#{aaa.aluno.nome}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Atividade</f:facet>
+								<h:outputText value="#{aaa.atividade.nome}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Professor</f:facet>
+								<h:outputText value="#{aaa.professor.nome}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Data</f:facet>
+								<h:outputText value="#{aaa.data.time}">
+									<f:convertDateTime pattern="dd/MM/yyyy"
+										timeZone="America/Sao_Paulo" />
+								</h:outputText>
+							</h:column>
+							<h:column>
+								<f:facet name="header">Ação</f:facet>
+								<h:commandButton action="#{frequenciaController.presensa(aaa)}"
+									value="Falta" class="btn btn-success" />
+								<h:commandButton action="#{frequenciaController.falta(aaa)}"
+									value="Presente" class="btn btn-danger" />
+
+							</h:column>
+						</h:dataTable>
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	</main>
+	<ui:include src="footer.xhtml"></ui:include>
+</h:body>
+</html>

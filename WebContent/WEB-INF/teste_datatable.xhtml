@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"></link>
+
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+</h:head>
+<h:body>
+
+	<h:dataTable id="myTable" class="table table-hover table-borderLess">
+		<h:column>
+			<f:facet name="header">Identificador</f:facet>
+			<p>Teste</p>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Nome</f:facet>
+			<p>Teste</p>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Atividade</f:facet>
+			<p>Teste</p>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Professor</f:facet>
+			<p>Teste</p>
+		</h:column>
+	</h:dataTable>
+
+	<script>
+	$(document).ready( function () {
+	    $('#myTable').DataTable();
+	} );
+	</script>
+</h:body>
+</html>

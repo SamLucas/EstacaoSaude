@@ -1,0 +1,120 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:include src="../template/header.xhtml"></ui:include>
+<h:body>
+
+	<ui:include src="../template/menu.xhtml"></ui:include>
+	<ui:include src="sub_menu.xhtml"></ui:include>
+
+	<main
+		class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+	<div class="main-content-container container-fluid px-4">
+		<div class="page-header row no-gutters py-4 mb-3 border-bottom">
+			<div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+				<span class="text-uppercase page-subtitle">Cadastro</span>
+				<h3 class="page-title">Alunos</h3>
+			</div>
+		</div>
+
+		<div class="col-lg-12 mb-12">
+			<div class="card card-small mb-4">
+				<div class="card-header border-bottom">
+					<h6 class="m-0">Dados</h6>
+				</div>
+				<h:form>
+					<div class="card-body row">
+						<div class="col-sm-6">
+							<strong class="text-muted d-block mb-2">Dados Pessoais</strong>
+							<div class="form-group">
+								<h:inputText a:placeholder="Nome" class="form-control" id="nome"
+									value="#{alunoController.aluno.nome}" />
+							</div>
+							<div class="form-group">
+								<h:inputText a:placeholder="Email" class="form-control"
+									id="email" value="#{alunoController.aluno.email}" />
+							</div>
+							<div class="form-group">
+								<h:inputText a:placeholder="Senha" class="form-control"
+									id="senha" value="#{alunoController.aluno.senha}" />
+							</div>
+							<div class="form-group">
+								<h:inputText a:placeholder="telefone" class="form-control"
+									id="telefone" value="#{alunoController.aluno.telefone}" />
+							</div>
+							<div class="form-group form-row">
+								<div class="form-group col-sm-4">
+									<h:inputText a:placeholder="Peso" class="form-control"
+										id="peso" value="#{alunoController.aluno.peso}" />
+								</div>
+								<div class="form-group col-sm-4">
+									<h:inputText a:placeholder="Altura" class="form-control"
+										id="altura" value="#{alunoController.aluno.altura}" />
+								</div>
+								<div class="form-group col-sm-4">
+									<h:inputText id="dtCadastro" class="form-control"
+										value="#{alunoController.aluno.data.time}">
+										<f:passThroughAttribute name="type" value="date" />
+										<f:convertDateTime pattern="yyyy-MM-dd"
+											timeZone="America/Sao_Paulo" />
+									</h:inputText>
+								</div>
+							</div>
+							<strong class="text-muted d-block mb-2">Observações</strong>
+							<div class="form-group">
+								<h:inputTextarea class="form-control" id="observacao"
+									value="#{alunoController.aluno.observacao}"></h:inputTextarea>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<strong class="text-muted d-block mb-2">Objetivo</strong>
+							<div class="form-group">
+								<h:inputTextarea class="form-control" id="objetivo"
+									value="#{alunoController.aluno.objetivo}"></h:inputTextarea>
+							</div>
+							<strong class="text-muted d-block mb-2">Localidade</strong>
+							<div class="form-group form-row">
+								<div class="form-group col-sm-8">
+									<h:inputText a:placeholder="Endereço" id="endereco"
+										value="#{alunoController.aluno.endereco}" class="form-control" />
+								</div>
+								<div class="form-group col-sm-4">
+									<h:inputText a:placeholder="Numero" class="form-control"
+										id="numero" value="#{alunoController.aluno.numero}" />
+								</div>
+								<h:selectOneMenu value="#{alunoController.id_cidade}"
+									class="form-control">
+									<f:selectItem itemLabel="Selecione uma cidade" noSelectionOption="true" />
+									<f:selectItems value="#{alunoController.todosCidade}" var="f"
+										itemLabel="#{f.nome}" itemValue="#{f.id}" />
+								</h:selectOneMenu>
+							</div>
+							<strong class="text-muted d-block mb-2">Sexo</strong>
+							<h:selectOneRadio value="#{alunoController.aluno.sexo}" class="custom-control custom-control-inline custom-radio">
+								<f:selectItems class="custom-control-input"  value="#{alunoController.todosSexos}" var="s"
+									itemLabel="#{s.descricao}" itemValue="#{s}" />
+							</h:selectOneRadio>
+
+						</div>
+					</div>
+					<div class="modal-footer">
+						<h:commandButton class="btn btn-primary"
+							value="Salvar
+						mudanças" action="#{alunoController.gravar}"></h:commandButton>
+					</div>
+				</h:form>
+			</div>
+		</div>
+	</div>
+	</main>
+
+
+	<ui:include src="../template/footer.xhtml"></ui:include>
+</h:body>
+</html>
